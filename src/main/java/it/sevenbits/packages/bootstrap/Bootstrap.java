@@ -18,7 +18,7 @@ public final class Bootstrap {
     private Bootstrap() {
     }
 
-    private static String EXAMPLE = "gheriug; weogjw";
+    private static String EXAMPLE = "{gheriu{  g; {weogjw";
 
     /**
      * main method

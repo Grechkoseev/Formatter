@@ -13,7 +13,6 @@ public class OutputStringContainer implements IOutputStringContainer {
      * Constructor
      */
     public OutputStringContainer() {
-        
     }
 
     /**

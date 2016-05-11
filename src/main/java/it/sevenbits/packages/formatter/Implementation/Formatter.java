@@ -4,18 +4,29 @@ import it.sevenbits.packages.containers.inputStringContainer.IInputStringContain
 import it.sevenbits.packages.containers.outputStringContainer.IOutputStringContainer;
 import it.sevenbits.packages.formatter.IFormatter;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Class format code
  */
 public class Formatter implements IFormatter {
     /**
      * format method
+     *
+     * @param inputContainer
+     * @param outputContainer
      */
     public void format(final IInputStringContainer inputContainer, final IOutputStringContainer outputContainer) {
-    int length = inputContainer.getLength();
+        int length = inputContainer.getLength();
+        Map<Character, String> hashMap = new HashMap<Character, String>();
+        hashMap.put('{', "\n");
+        Set keys = hashMap.keySet();
         for (int i = 0; i < length; i++) {
-        outputContainer.setElement(inputContainer.getElement(i));
+            for (int j = 0; j < keys.size(); j++) {
+                
+            }
         }
-        System.out.println(outputContainer.getString());
     }
 }

@@ -4,7 +4,7 @@ import it.sevenbits.packages.containers.inputStringContainer.IInputStringContain
 import it.sevenbits.packages.containers.outputStringContainer.IOutputStringContainer;
 
 /**
- * Interace for formatter class
+ * Interface for formatter class
  */
 public interface IFormatter {
     /**
