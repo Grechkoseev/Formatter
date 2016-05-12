@@ -7,7 +7,7 @@ import it.sevenbits.packages.containers.inputStringContainer.IInputStringContain
  */
 public class InputStringContainer implements IInputStringContainer {
 
-    private String str;
+    private StringBuffer str = new StringBuffer();
     /**
      * Default constructor
      */
@@ -19,7 +19,7 @@ public class InputStringContainer implements IInputStringContainer {
      * @param inputStr input String
      */
     public InputStringContainer(final String inputStr) {
-    str = inputStr;
+    str.append(inputStr);
     }
 
     /**
@@ -34,8 +34,13 @@ public class InputStringContainer implements IInputStringContainer {
     /**
      * getting length of input string
      * @return length
+     * @throws InputStringContainerException
      */
-    public int getLength() {
-        return str.length();
+    public int getLength() throws InputStringContainerException {
+        try {
+            return str.length();
+        } catch (NullPointerException ex) {
+            throw new InputStringContainerException("Incoming string is null", ex);
+        }
     }
 }

@@ -1,14 +1,26 @@
 package it.sevenbits.packages.reader;
 
+import it.sevenbits.packages.reader.Implementation.FileReaderException;
+
 /**
  * Reader interface
  */
 public interface IReader {
     /**
      * read one symbol
-     * @param index of current element
-     * @param str is input string
      * @return symbol str[index]
      */
-    char readSymbol(int index, String str);
+    char getElement() throws FileReaderException;
+
+    /**
+     * hasNext method
+     * @return false if read symbol of end of file
+     * @throws FileReaderException
+     */
+    boolean hasNext() throws FileReaderException;
+    /**
+     * Close input stream
+     * @throws FileReaderException
+     */
+    void close() throws FileReaderException;
 }

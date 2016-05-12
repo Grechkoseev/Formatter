@@ -1,5 +1,6 @@
 package it.sevenbits.packages.containers.inputStringContainer;
 
+import it.sevenbits.packages.containers.inputStringContainer.Implementation.InputStringContainerException;
 /**
  * Interface of container
  */
@@ -14,6 +15,7 @@ public interface IInputStringContainer {
     /**
      * getting of input string length
      * @return length
+     * @throws InputStringContainerException
      */
-    int getLength();
+    int getLength() throws InputStringContainerException;
 }

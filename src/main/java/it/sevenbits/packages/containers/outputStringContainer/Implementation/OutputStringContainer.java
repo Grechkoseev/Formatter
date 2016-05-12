@@ -7,7 +7,7 @@ import it.sevenbits.packages.containers.outputStringContainer.IOutputStringConta
  */
 public class OutputStringContainer implements IOutputStringContainer {
 
-    private String str;
+    private StringBuffer str = new StringBuffer();
 
     /**
      * Constructor
@@ -17,17 +17,17 @@ public class OutputStringContainer implements IOutputStringContainer {
 
     /**
      * setter
-     * @param element is setting element
+     * @param substring is setting string
      */
-    public void setElement(final char element) {
-        str += element;
+    public void setSubstring(final StringBuffer substring) {
+        str.append(substring);
     }
 
     /**
      * getter of final String
      * @return output string
      */
-    public String getString() {
+    public StringBuffer getString() {
         return str;
     }
 }

@@ -6,13 +6,13 @@ package it.sevenbits.packages.containers.outputStringContainer;
 public interface IOutputStringContainer {
     /**
      * setter
-     * @param element is setting element
+     * @param substring is setting string
      */
-    void setElement(char element);
+    void setSubstring(final StringBuffer substring);
 
     /**
      * getting of final string
      * @return output string
      */
-    String getString();
+    StringBuffer getString();
 }
