@@ -51,6 +51,8 @@ public class Formatter implements IFormatter {
                     writer.write(String.valueOf(inputChar));
                 }
             }
+            reader.close();
+            writer.close();
         } catch (FileReaderException ex) {
             throw new FormatException("Can't read file", ex);
         } catch (FileWriterException ex) {
