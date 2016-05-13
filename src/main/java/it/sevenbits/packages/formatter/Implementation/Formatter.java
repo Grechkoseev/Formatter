@@ -5,7 +5,7 @@ import it.sevenbits.packages.containers.inputStringContainer.Implementation.Inpu
 import it.sevenbits.packages.containers.outputStringContainer.IOutputStringContainer;
 import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.reader.IReader;
-import it.sevenbits.packages.reader.Implementation.FileReaderException;
+import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.writer.IWriter;
 import it.sevenbits.packages.writer.Implementation.FileWriterException;
 
@@ -17,10 +17,12 @@ import java.util.Map;
  */
 public class Formatter implements IFormatter {
     /**
-     * Magic method
-     *
+     * magic method
      * @param inputContainer
      * @param outputContainer
+     * @param reader
+     * @param writer
+     * @throws FormatException
      */
     public void format(final IInputStringContainer inputContainer, final IOutputStringContainer outputContainer, final IReader reader, final IWriter writer) throws FormatException {
         Map<Character, String> hashMap = new HashMap<Character, String>();
@@ -53,7 +55,7 @@ public class Formatter implements IFormatter {
             }
             reader.close();
             writer.close();
-        } catch (FileReaderException ex) {
+        } catch (ReaderException ex) {
             throw new FormatException("Can't read file", ex);
         } catch (FileWriterException ex) {
             throw new FormatException("Can't write in file", ex);

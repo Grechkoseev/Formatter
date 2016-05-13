@@ -5,58 +5,59 @@ import it.sevenbits.packages.reader.IReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.BufferedInputStream;
 
 /**
  * Read of one symbol of string
  */
 public class FileReader implements IReader {
 
-    private FileInputStream fileInputStream;
+    private BufferedInputStream fileInputStream;
 
     /**
      * Constructor
-     * @throws FileReaderException
+     * @throws ReaderException
      */
-    public FileReader() throws FileReaderException {
+    public FileReader() throws ReaderException {
         try {
-                fileInputStream = new FileInputStream("InputFile");
+                fileInputStream = new BufferedInputStream(new FileInputStream("InputFile"));
         } catch (FileNotFoundException ex) {
-            throw new FileReaderException("File not found", ex);
+            throw new ReaderException("File not found", ex);
         }
     }
     /**
      * Read one symbol
      * @return str[index]
      */
-    public char getElement() throws FileReaderException {
+    public char getElement() throws ReaderException {
         try {
             return (char) fileInputStream.read();
         } catch (IOException ex) {
-            throw new FileReaderException("File not found", ex);
+            throw new ReaderException("File not found", ex);
         }
     }
 
     /**
+     * Method check existing of next element
      * @return true if read not the end of file
-     * @throws FileReaderException
+     * @throws ReaderException
      */
-    public boolean hasNext() throws FileReaderException {
+    public boolean hasNext() throws ReaderException {
         try {
             return fileInputStream.available() != 0;
         } catch (IOException ex) {
-            throw new FileReaderException("Can't correctly read to the end of file", ex);
+            throw new ReaderException("Can't correctly read to the end of file", ex);
         }
     }
     /**
-     * hasNext method
      * Close input stream
-     * @throws FileReaderException
+     * @throws ReaderException
      */
-    public void close() throws FileReaderException {
+    public void close() throws ReaderException {
         try {
             fileInputStream.close();
         } catch (IOException ex) {
-            throw new FileReaderException("Can't close input stream", ex);
+            throw new ReaderException("Can't close input stream", ex);
         }
     }
 }
