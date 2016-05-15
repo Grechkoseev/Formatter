@@ -4,9 +4,11 @@ import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.formatter.Implementation.FormatException;
 import it.sevenbits.packages.formatter.Implementation.Formatter;
 import it.sevenbits.packages.reader.IReader;
+import it.sevenbits.packages.reader.Implementation.FileReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.reader.Implementation.StringReader;
 import it.sevenbits.packages.writer.IWriter;
+import it.sevenbits.packages.writer.Implementation.FileWriter;
 import it.sevenbits.packages.writer.Implementation.StringWriter;
 import it.sevenbits.packages.writer.Implementation.WriterException;
 
@@ -21,34 +23,37 @@ public final class Bootstrap {
     private Bootstrap() {
     }
 
-    private static String EXAMPLE = "class Jrhrug{fwegferg          { 4ege3g4g; efw3; }gerg}";
+    private static String EXAMPLE = "class Jrhrug{fwegferg          { 4ege3g4g; efw3;sdgsg }gerg}";
 
     /**
      * main method
-     *
-     * @param args just like that
+     * @param args args[0] is full path to input file, args[1] is full path to output file
      * @throws FormatException
      * @throws BootstrapException
      */
     public static void main(final String[] args) throws FormatException, BootstrapException {
-        IFormatter formatter = new Formatter();
-        /*try {
-            IReader reader = new FileReader();
-            IWriter writer = new FileWriter();
-            formatter.format(reader, writer);
-        } catch (ReaderException ex) {
-            throw new BootstrapException(ex);
-        } catch (WriterException ex) {
-            throw new BootstrapException(ex);
-        }*/
-        try {
-            IReader reader = new StringReader(EXAMPLE);
-            IWriter writer = new StringWriter();
-            formatter.format(reader, writer);
-        } catch (ReaderException ex) {
-            throw new BootstrapException(ex);
-        } catch (WriterException ex) {
-            throw new BootstrapException(ex);
+        if (args.length == 2) {
+            IFormatter formatter = new Formatter();
+            try {
+                IReader reader = new FileReader(args[0]);
+                IWriter writer = new FileWriter(args[1]);
+                formatter.format(reader, writer);
+            } catch (ReaderException ex) {
+                throw new BootstrapException(ex);
+            } catch (WriterException ex) {
+                throw new BootstrapException(ex);
+            }
+        } else {
+            IFormatter formatter = new Formatter();
+            try {
+                IReader reader = new StringReader(EXAMPLE);
+                IWriter writer = new StringWriter();
+                formatter.format(reader, writer);
+            } catch (ReaderException ex) {
+                throw new BootstrapException(ex);
+            } catch (WriterException ex) {
+                throw new BootstrapException(ex);
+            }
         }
     }
 }

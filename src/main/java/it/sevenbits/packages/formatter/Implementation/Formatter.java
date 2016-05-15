@@ -21,7 +21,7 @@ public class Formatter implements IFormatter {
      */
     public void format(final IReader reader, final IWriter writer) throws FormatException {
         Map<Character, String> hashMap = new HashMap<Character, String>();
-        hashMap.put(';', ";\n    ");
+        hashMap.put(';', ";\n");
         hashMap.put('{', " {\n    ");
         hashMap.put('}', "\n} ");
         int countOfSpaces = 0;
@@ -48,16 +48,22 @@ public class Formatter implements IFormatter {
                     }
                     countOfSpaces = 0;
                 } else if (inputChar == '}') {
-                    countOfSpaces = 0;
                     countOfBraces--;
+                    countOfSpaces = 0;
                     char[] array = new char[countOfBraces * 4];
                     for (int i = 0; i < array.length; i++) {
                         array[i] = ' ';
                     }
                     String stringOfSpaces = new String(array);
                     hashMap.put('}', "\n" + stringOfSpaces + "} ");
-                } else {
+                } else if (inputChar == ';') {
                     countOfSpaces = 0;
+                    char[] array = new char[countOfBraces * 4];
+                    for (int i = 0; i < array.length; i++) {
+                        array[i] = ' ';
+                    }
+                    String stringOfSpaces = new String(array);
+                    hashMap.put(';', ";\n" + stringOfSpaces);
                 }
                 if (hashMap.containsKey(inputChar)) {
                     writer.write(hashMap.get(inputChar));

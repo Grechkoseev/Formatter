@@ -16,11 +16,12 @@ public class FileReader implements IReader {
 
     /**
      * Constructor
+     * @param inputFile is input file
      * @throws ReaderException
      */
-    public FileReader() throws ReaderException {
+    public FileReader(final String inputFile) throws ReaderException {
         try {
-                fileInputStream = new BufferedInputStream(new FileInputStream("src/main/resources/InputFile"));
+                fileInputStream = new BufferedInputStream(new FileInputStream(inputFile));
         } catch (FileNotFoundException ex) {
             throw new ReaderException("File not found", ex);
         }

@@ -17,9 +17,9 @@ public class FileWriter implements IWriter {
      * Constructor
      * @throws WriterException
      */
-    public FileWriter() throws WriterException {
+    public FileWriter(final String outputFile) throws WriterException {
         try {
-        fileOutputStream = new FileOutputStream("OutputFile");
+        fileOutputStream = new FileOutputStream(outputFile);
         } catch (FileNotFoundException ex) {
             throw new WriterException("Output file not found", ex);
         }
