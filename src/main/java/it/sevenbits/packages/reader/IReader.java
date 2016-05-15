@@ -10,6 +10,7 @@ public interface IReader {
     /**
      * read one symbol
      * @return symbol str[index]
+     * @throws ReaderException
      */
     char getElement() throws ReaderException;
 

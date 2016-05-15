@@ -2,58 +2,61 @@ package it.sevenbits.packages.reader.Implementation;
 
 import it.sevenbits.packages.reader.IReader;
 
-import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
- * Read elements of string
+ * class read input string
  */
 public class StringReader implements IReader {
 
-    private BufferedInputStream bufferedInputStream;
     private InputStream inputStream;
 
     /**
      * Constructor
+     * @param inputString is input string
+     * @throws ReaderException
      */
-    public StringReader() {
-        bufferedInputStream = new BufferedInputStream(inputStream);
+    public StringReader(final String inputString) throws ReaderException {
+            inputStream = new ByteArrayInputStream(inputString.getBytes());
     }
+
     /**
-     * getting one symbol from string
-     * @return element
+     * method get one element of input string
+     * @return getting element
      * @throws ReaderException
      */
     public char getElement() throws ReaderException {
         try {
-            return (char) bufferedInputStream.read();
+            return (char) inputStream.read();
         } catch (IOException ex) {
-            throw new ReaderException("Can't found string", ex);
+            throw new ReaderException("Can't read next element", ex);
         }
     }
 
     /**
-     * method check existing next element
-     * @return
+     * Method check existing of next element
+     * @return true if next element exist
+     * @throws ReaderException
      */
     public boolean hasNext() throws ReaderException {
         try {
-            return bufferedInputStream.available() != 0;
+            return inputStream.available() != 0;
         } catch (IOException ex) {
-            throw new ReaderException("Can't correctly read to the end of string", ex);
+            throw new ReaderException("Can't check existing of next element", ex);
         }
     }
 
     /**
-     * method close stream if all elements are reading
+     * Method close input stream
+     * @throws ReaderException
      */
     public void close() throws ReaderException {
         try {
-            bufferedInputStream.close();
+            inputStream.close();
         } catch (IOException ex) {
-            throw new ReaderException("Can't close input stream", ex);
+            throw new ReaderException("Can't close stream", ex);
         }
     }
 }

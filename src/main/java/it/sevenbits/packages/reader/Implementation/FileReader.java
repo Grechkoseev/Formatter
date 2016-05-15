@@ -28,6 +28,7 @@ public class FileReader implements IReader {
     /**
      * Read one symbol
      * @return str[index]
+     * @throws ReaderException
      */
     public char getElement() throws ReaderException {
         try {

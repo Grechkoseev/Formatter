@@ -2,38 +2,35 @@ package it.sevenbits.packages.writer.Implementation;
 
 import it.sevenbits.packages.writer.IWriter;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/**
- * Write substring in outputString
- */
-public class FileWriter implements IWriter {
 
-    private FileOutputStream fileOutputStream;
+/**
+ * Class write substring in output string
+ */
+public class StringWriter implements IWriter {
+
+    private ByteArrayOutputStream outputStream;
 
     /**
      * Constructor
      * @throws WriterException
      */
-    public FileWriter() throws WriterException {
-        try {
-        fileOutputStream = new FileOutputStream("OutputFile");
-        } catch (FileNotFoundException ex) {
-            throw new WriterException("Output file not found", ex);
-        }
+    public StringWriter() throws WriterException {
+        outputStream = new ByteArrayOutputStream();
     }
+
     /**
-     * Write output substring in output file
+     * Write output substring in output string
      * @param outputString is substring
      * @throws WriterException
      */
     public void write(final String outputString) throws WriterException {
         try {
-            fileOutputStream.write(outputString.getBytes());
+            outputStream.write(outputString.getBytes());
         } catch (IOException ex) {
-            throw new WriterException("Cannot write in file", ex);
+            throw new WriterException("Can't write in string", ex);
         }
     }
 
@@ -41,7 +38,7 @@ public class FileWriter implements IWriter {
      * method print on console results of working of program
      */
     public void printOnConsole() {
-        System.out.println("Formatted code is in Output file");
+            System.out.println(outputStream.toString());
     }
     /**
      * Close output stream
@@ -49,7 +46,7 @@ public class FileWriter implements IWriter {
      */
     public void close() throws WriterException {
         try {
-            fileOutputStream.close();
+            outputStream.close();
         } catch (IOException ex) {
             throw new WriterException("Can't close output stream", ex);
         }

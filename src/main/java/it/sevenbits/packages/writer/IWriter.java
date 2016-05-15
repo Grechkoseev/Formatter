@@ -1,6 +1,6 @@
 package it.sevenbits.packages.writer;
 
-import it.sevenbits.packages.writer.Implementation.FileWriterException;
+import it.sevenbits.packages.writer.Implementation.WriterException;
 
 /**
  * Writer interface
@@ -9,14 +9,18 @@ public interface IWriter {
     /**
      * Write one symbol in outputString
      * @param outputString
-     * @throws FileWriterException
-     * @return outputString
+     * @throws WriterException
      */
-    void write(final String outputString) throws FileWriterException;
+    void write(final String outputString) throws WriterException;
+
+    /**
+     * method print results of working of program on console
+     */
+    void printOnConsole();
 
     /**
      * Close output stream
-     * @throws FileWriterException
+     * @throws WriterException
      */
-    void close() throws FileWriterException;
+    void close() throws WriterException;
 }

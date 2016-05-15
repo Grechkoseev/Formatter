@@ -1,13 +1,10 @@
 package it.sevenbits.packages.formatter.Implementation;
 
-import it.sevenbits.packages.containers.inputStringContainer.IInputStringContainer;
-import it.sevenbits.packages.containers.inputStringContainer.Implementation.InputStringContainerException;
-import it.sevenbits.packages.containers.outputStringContainer.IOutputStringContainer;
 import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.reader.IReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.writer.IWriter;
-import it.sevenbits.packages.writer.Implementation.FileWriterException;
+import it.sevenbits.packages.writer.Implementation.WriterException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,32 +15,15 @@ import java.util.Map;
 public class Formatter implements IFormatter {
     /**
      * magic method
-     * @param inputContainer
-     * @param outputContainer
      * @param reader
      * @param writer
      * @throws FormatException
      */
-    public void format(final IInputStringContainer inputContainer, final IOutputStringContainer outputContainer, final IReader reader, final IWriter writer) throws FormatException {
+    public void format(final IReader reader, final IWriter writer) throws FormatException {
         Map<Character, String> hashMap = new HashMap<Character, String>();
         hashMap.put(';', ";\n    ");
         hashMap.put('{', " {\n    ");
         hashMap.put('}', "\n} ");
-        //string implementation
-        try {
-            int length = inputContainer.getLength();
-            for (int i = 0; i < length; i++) {
-                if (hashMap.containsKey(inputContainer.getElement(i))) {
-                    outputContainer.setSubstring(new StringBuffer(hashMap.get(inputContainer.getElement(i))));
-                } else {
-                    outputContainer.setSubstring(new StringBuffer(String.valueOf(inputContainer.getElement(i))));
-                }
-            }
-        } catch (InputStringContainerException ex) {
-            throw new FormatException("Incoming argument is null", ex);
-        }
-
-        //file implementation
         try {
             while (reader.hasNext()) {
                 Character inputChar = reader.getElement();
@@ -54,11 +34,14 @@ public class Formatter implements IFormatter {
                 }
             }
             reader.close();
+            writer.printOnConsole();
             writer.close();
         } catch (ReaderException ex) {
             throw new FormatException("Can't read file", ex);
-        } catch (FileWriterException ex) {
+        } catch (WriterException ex) {
             throw new FormatException("Can't write in file", ex);
+        } catch (NullPointerException ex) {
+            throw new FormatException("Incoming stream is null", ex);
         }
     }
 }
