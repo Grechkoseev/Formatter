@@ -3,6 +3,8 @@ package it.sevenbits.packages.bootstrap;
 import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.formatter.Implementation.FormatException;
 import it.sevenbits.packages.formatter.Implementation.Formatter;
+import it.sevenbits.packages.printHelp.PrintHelp;
+import it.sevenbits.packages.printHelp.PrintHelpException;
 import it.sevenbits.packages.reader.IReader;
 import it.sevenbits.packages.reader.Implementation.FileReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
@@ -32,6 +34,17 @@ public final class Bootstrap {
      * @throws BootstrapException
      */
     public static void main(final String[] args) throws FormatException, BootstrapException {
+        if (args.length > 0) {
+            if (args[0].equals("--help")) {
+                try {
+                    PrintHelp help = new PrintHelp();
+                    help.printHelp();
+                    return;
+                } catch (PrintHelpException ex) {
+                    throw new BootstrapException(ex);
+                }
+            }
+        }
         IFormatter formatter = new Formatter();
         try {
             IReader reader = new FileReader();
@@ -51,5 +64,6 @@ public final class Bootstrap {
         } catch (WriterException ex) {
             throw new BootstrapException(ex);
         }
+        System.out.println(args[0]);
     }
 }
