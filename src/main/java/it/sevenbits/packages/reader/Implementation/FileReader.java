@@ -20,7 +20,7 @@ public class FileReader implements IReader {
      */
     public FileReader() throws ReaderException {
         try {
-                fileInputStream = new BufferedInputStream(new FileInputStream("InputFile"));
+                fileInputStream = new BufferedInputStream(new FileInputStream("src/main/resources/InputFile"));
         } catch (FileNotFoundException ex) {
             throw new ReaderException("File not found", ex);
         }

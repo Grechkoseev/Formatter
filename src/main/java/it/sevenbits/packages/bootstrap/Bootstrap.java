@@ -3,14 +3,10 @@ package it.sevenbits.packages.bootstrap;
 import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.formatter.Implementation.FormatException;
 import it.sevenbits.packages.formatter.Implementation.Formatter;
-import it.sevenbits.packages.printHelp.PrintHelp;
-import it.sevenbits.packages.printHelp.PrintHelpException;
 import it.sevenbits.packages.reader.IReader;
-import it.sevenbits.packages.reader.Implementation.FileReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.reader.Implementation.StringReader;
 import it.sevenbits.packages.writer.IWriter;
-import it.sevenbits.packages.writer.Implementation.FileWriter;
 import it.sevenbits.packages.writer.Implementation.StringWriter;
 import it.sevenbits.packages.writer.Implementation.WriterException;
 
@@ -25,28 +21,18 @@ public final class Bootstrap {
     private Bootstrap() {
     }
 
-    private static String EXAMPLE = "class{int x=5;while(true){println(Hello, world!)}}";
+    private static String EXAMPLE = "class Jrhrug{fwegferg          { 4ege3g4g; efw3; }gerg}";
 
     /**
      * main method
+     *
      * @param args just like that
      * @throws FormatException
      * @throws BootstrapException
      */
     public static void main(final String[] args) throws FormatException, BootstrapException {
-        if (args.length > 0) {
-            if (args[0].equals("--help")) {
-                try {
-                    PrintHelp help = new PrintHelp();
-                    help.printHelp();
-                    return;
-                } catch (PrintHelpException ex) {
-                    throw new BootstrapException(ex);
-                }
-            }
-        }
         IFormatter formatter = new Formatter();
-        try {
+        /*try {
             IReader reader = new FileReader();
             IWriter writer = new FileWriter();
             formatter.format(reader, writer);
@@ -54,7 +40,7 @@ public final class Bootstrap {
             throw new BootstrapException(ex);
         } catch (WriterException ex) {
             throw new BootstrapException(ex);
-        }
+        }*/
         try {
             IReader reader = new StringReader(EXAMPLE);
             IWriter writer = new StringWriter();
@@ -64,6 +50,5 @@ public final class Bootstrap {
         } catch (WriterException ex) {
             throw new BootstrapException(ex);
         }
-        System.out.println(args[0]);
     }
 }

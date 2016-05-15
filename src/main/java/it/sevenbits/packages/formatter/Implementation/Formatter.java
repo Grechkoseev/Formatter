@@ -24,9 +24,41 @@ public class Formatter implements IFormatter {
         hashMap.put(';', ";\n    ");
         hashMap.put('{', " {\n    ");
         hashMap.put('}', "\n} ");
+        int countOfSpaces = 0;
+        int countOfBraces = 0;
         try {
             while (reader.hasNext()) {
                 Character inputChar = reader.getElement();
+                if (inputChar == ' ') {
+                    countOfSpaces++;
+                    if (countOfSpaces > 1) {
+                        continue;
+                    }
+                } else if (inputChar == '{') {
+                    countOfBraces++;
+                    char[] array = new char[countOfBraces * 4];
+                    for (int i = 0; i < array.length; i++) {
+                        array[i] = ' ';
+                    }
+                    String stringOfSpaces = new String(array);
+                    if (countOfSpaces > 0) {
+                        hashMap.put('{', "{\n" + stringOfSpaces);
+                    } else {
+                        hashMap.put('{', " {\n" + stringOfSpaces);
+                    }
+                    countOfSpaces = 0;
+                } else if (inputChar == '}') {
+                    countOfSpaces = 0;
+                    countOfBraces--;
+                    char[] array = new char[countOfBraces * 4];
+                    for (int i = 0; i < array.length; i++) {
+                        array[i] = ' ';
+                    }
+                    String stringOfSpaces = new String(array);
+                    hashMap.put('}', "\n" + stringOfSpaces + "} ");
+                } else {
+                    countOfSpaces = 0;
+                }
                 if (hashMap.containsKey(inputChar)) {
                     writer.write(hashMap.get(inputChar));
                 } else {
