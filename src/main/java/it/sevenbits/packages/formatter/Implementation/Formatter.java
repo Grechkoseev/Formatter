@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Formatter implements IFormatter {
     /**
-     * magic method
+     * Magic method
      * @param reader
      * @param writer
      * @throws FormatException
