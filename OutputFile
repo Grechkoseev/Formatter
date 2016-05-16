@@ -1,6 +1,0 @@
-classJrhrug {
-    intx=5;
-    while(true) {
-    println(Hello,world!)
-} 
-} 
