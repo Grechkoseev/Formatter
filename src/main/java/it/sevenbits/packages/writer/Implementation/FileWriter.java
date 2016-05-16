@@ -15,6 +15,7 @@ public class FileWriter implements IWriter {
 
     /**
      * Constructor
+     * @param outputFile is outputFile
      * @throws WriterException
      */
     public FileWriter(final String outputFile) throws WriterException {
