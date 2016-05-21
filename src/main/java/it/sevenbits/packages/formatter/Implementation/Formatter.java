@@ -24,51 +24,38 @@ public class Formatter implements IFormatter {
         hashMap.put(';', ";\n");
         hashMap.put('{', " {\n    ");
         hashMap.put('}', "\n} ");
+        hashMap.put(':', ":\n");
         int countOfBraces = 0;
         try {
             while (reader.hasNext()) {
                 Character inputChar = reader.getElement();
-                if (inputChar == '{') {
-                    countOfBraces++;
-                    char[] array = new char[countOfBraces * 4];
-                    for (int i = 0; i < array.length; i++) {
-                        array[i] = ' ';
-                    }
-                    String stringOfSpaces = new String(array);
-                    hashMap.remove(' ');
-                    hashMap.put('{', "{\n" + stringOfSpaces);
-                    hashMap.put('}', "\n" + stringOfSpaces + "}");
-                    hashMap.put(';', ";\n" + stringOfSpaces);
-                } else if (inputChar == '}') {
-                    countOfBraces--;
-                    char[] array = new char[countOfBraces * 4];
-                    for (int i = 0; i < array.length; i++) {
-                        array[i] = ' ';
-                    }
-                    String stringOfSpaces = new String(array);
-                    hashMap.remove(' ');
-                    hashMap.put('{', "{\n" + stringOfSpaces);
-                    hashMap.put('}', "\n" + stringOfSpaces + "} ");
-                    hashMap.put(';', ";\n" + stringOfSpaces);
-                } else if (inputChar == ' ') {
-                    char[] array = new char[countOfBraces * 4];
-                    for (int i = 0; i < array.length; i++) {
-                        array[i] = ' ';
-                    }
-                    String stringOfSpaces = new String(array);
-                    hashMap.put('{', "{\n" + stringOfSpaces);
-                    hashMap.put('}', "\n" + stringOfSpaces + "}");
-                    hashMap.put(';', ";\n" + stringOfSpaces);
+                char[] array = new char[countOfBraces * 4];
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = ' ';
                 }
-                    if (hashMap.containsKey(inputChar)) {
-                    writer.write(hashMap.get(inputChar));
-                } else {
-                    writer.write(String.valueOf(inputChar));
-                }
-                if (inputChar == ' ') {
-                    hashMap.put(' ', "");
-                } else {
-                    hashMap.remove(' ');
+                String stringOfSpaces = new String(array);
+                switch (inputChar) {
+                    case ' ':
+                        hashMap.put('{', "{\n" + stringOfSpaces);
+                        if (hashMap.containsKey(inputChar)) {
+                            writer.write(hashMap.get(inputChar));
+                        } else {
+                            writer.write(String.valueOf(inputChar));
+                        }
+                        hashMap.put(' ', "");
+                        break;
+                    case '{':
+                        writer.write(String.valueOf(inputChar));
+                        countOfBraces++;
+                    default:
+                        hashMap.remove(' ');
+                        hashMap.put('{', " {\n" + stringOfSpaces);
+                        if (hashMap.containsKey(inputChar)) {
+                            writer.write(hashMap.get(inputChar));
+                        } else {
+                            writer.write(String.valueOf(inputChar));
+                        }
+                        break;
                 }
             }
             reader.close();
