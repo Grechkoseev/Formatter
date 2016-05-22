@@ -22,11 +22,11 @@ public class Formatter implements IFormatter {
     public void format(final IReader reader, final IWriter writer) throws FormatException {
         Map<Character, String> hashMap = new HashMap<Character, String>();
         hashMap.put(';', ";\n");
-        hashMap.put('{', " {\n    ");
         hashMap.put('}', "\n} ");
         hashMap.put(':', ":\n");
         int countOfBraces = 0;
         try {
+            Character previousChar = ' ';
             while (reader.hasNext()) {
                 Character inputChar = reader.getElement();
                 char[] array = new char[countOfBraces * 4];
@@ -45,18 +45,34 @@ public class Formatter implements IFormatter {
                         hashMap.put(' ', "");
                         break;
                     case '{':
-                        writer.write(String.valueOf(inputChar));
                         countOfBraces++;
+                        hashMap.remove(' ');
+                        hashMap.put(';', ";\n" + stringOfSpaces);
+                        writer.write(hashMap.get(inputChar) + "    ");
+                        break;
+                    case '}':
+                        countOfBraces--;
+                        if (previousChar.equals(';')) {
+                            writer.write(String.valueOf(inputChar));
+                        } else {
+                            hashMap.put('}', '\n' + stringOfSpaces.substring(0, stringOfSpaces.length() - 4) + '}');
+                            writer.write(hashMap.get(inputChar));
+                        }
+                        break;
+                    case ';':
+                        hashMap.put(';', ";\n" + stringOfSpaces.substring(0, stringOfSpaces.length() - 4));
+                        writer.write(hashMap.get(inputChar));
+                        break;
                     default:
                         hashMap.remove(' ');
                         hashMap.put('{', " {\n" + stringOfSpaces);
-                        if (hashMap.containsKey(inputChar)) {
-                            writer.write(hashMap.get(inputChar));
-                        } else {
-                            writer.write(String.valueOf(inputChar));
+                        if (previousChar.equals(';')) {
+                            writer.write("    ");
                         }
+                        writer.write(String.valueOf(inputChar));
                         break;
                 }
+                previousChar = inputChar;
             }
             reader.close();
             writer.printOnConsole();

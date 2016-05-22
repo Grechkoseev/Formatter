@@ -23,7 +23,7 @@ public final class Bootstrap {
     private Bootstrap() {
     }
 
-    private static String EXAMPLE = "class Example{int x=5;while(true){println(Hello, world!)}}";
+    private static String EXAMPLE = "class Example {int x=5;int y = 2;while(true){println(Hello, world!);qwerty;}}";
 
     /**
      * main method

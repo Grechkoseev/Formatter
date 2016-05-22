@@ -5,7 +5,7 @@ package it.sevenbits.packages.bootstrap;
  */
 class BootstrapException extends Throwable {
     /**
-     * BootstrapExcseption
+     * BootstrapException
      * @param ex
      */
     BootstrapException(final Throwable ex) {
