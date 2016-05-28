@@ -24,8 +24,6 @@ public class TablesOfTransitions {
         Character[] specElementsFour = new Character[] { '{', 's', null, '}', '\n' };
         
         Character[] specElementsFive = new Character[] { '{', 's', ';', '}', '\n' };
-        
-        finalState = new Integer[] { 3, 4 };
 
         initialState = new Character[] { '{', 's', null, null, '\n'};
         
