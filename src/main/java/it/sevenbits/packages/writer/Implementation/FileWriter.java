@@ -39,7 +39,7 @@ public class FileWriter implements IWriter {
     }
 
     /**
-     * method print on console results of working of program
+     * method print on console results of work of program
      */
     public void printOnConsole() {
         System.out.println("Formatted code is in Output file");

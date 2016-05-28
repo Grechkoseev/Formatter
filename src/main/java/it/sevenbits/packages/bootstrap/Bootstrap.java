@@ -3,10 +3,13 @@ package it.sevenbits.packages.bootstrap;
 import it.sevenbits.packages.formatter.IFormatter;
 import it.sevenbits.packages.formatter.Implementation.FormatException;
 import it.sevenbits.packages.formatter.Implementation.Formatter;
+import it.sevenbits.packages.formatter.Implementation.IndentCounter;
 import it.sevenbits.packages.reader.IReader;
 import it.sevenbits.packages.reader.Implementation.FileReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.reader.Implementation.StringReader;
+import it.sevenbits.packages.tables.TableOfOutputs;
+import it.sevenbits.packages.tables.TablesOfTransitions;
 import it.sevenbits.packages.writer.IWriter;
 import it.sevenbits.packages.writer.Implementation.FileWriter;
 import it.sevenbits.packages.writer.Implementation.StringWriter;
@@ -33,7 +36,8 @@ public final class Bootstrap {
      */
     public static void main(final String[] args) throws FormatException, BootstrapException {
         if (args.length == 2) {
-            IFormatter formatter = new Formatter();
+            IndentCounter indentCounter = new IndentCounter();
+            IFormatter formatter = new Formatter(new TablesOfTransitions(), new TableOfOutputs(indentCounter), indentCounter);
             try {
                 IReader reader = new FileReader(args[0]);
                 IWriter writer = new FileWriter(args[1]);
@@ -44,7 +48,8 @@ public final class Bootstrap {
                 throw new BootstrapException(ex);
             }
         } else {
-            IFormatter formatter = new Formatter();
+            IndentCounter indentCounter = new IndentCounter();
+            IFormatter formatter = new Formatter(new TablesOfTransitions(), new TableOfOutputs(indentCounter), indentCounter);
             try {
                 IReader reader = new StringReader(EXAMPLE);
                 IWriter writer = new StringWriter();
