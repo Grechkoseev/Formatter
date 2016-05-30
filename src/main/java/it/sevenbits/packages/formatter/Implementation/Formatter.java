@@ -84,7 +84,6 @@ public class Formatter implements IFormatter {
      */
     private void output(final int currentState, final int toState, final char element, final IWriter writer) throws WriterException {
         Integer[] col = outputTable[toState];
-        System.out.println(currentState + "->" + toState + " " + element);
         int act = col[currentState];
         writer.write(actions.get(act).perform(element, indentCounter.getIndentCounter()));
     }

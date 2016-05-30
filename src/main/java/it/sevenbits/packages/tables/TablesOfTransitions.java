@@ -7,7 +7,6 @@ public class TablesOfTransitions {
 
     private Character[][] arrayOfStates;
     private Character[] initialState;
-    private Integer[] finalState;
     private Character[] alphabet;
 
     /**
@@ -60,5 +59,4 @@ public class TablesOfTransitions {
     public Character[] getInitialState() {
         return initialState;
     }
-    
 }
