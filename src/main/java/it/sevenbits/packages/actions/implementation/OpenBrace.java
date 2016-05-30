@@ -1,14 +1,11 @@
 package it.sevenbits.packages.actions.implementation;
 
-import it.sevenbits.packages.actions.IOperation;
-import it.sevenbits.packages.formatter.Implementation.IndentCounter;
+import it.sevenbits.packages.actions.IActions;
+import it.sevenbits.packages.actions.IndentCounter;
 
 import java.util.Arrays;
 
-/**
- * adds the indentation and transit on new line
- */
-public class AddIndent implements IOperation {
+public class OpenBrace implements IActions {
 
     private char indentSymbol;
     private int indentLength;
@@ -19,7 +16,7 @@ public class AddIndent implements IOperation {
      * @param indentSymbol symbol to indent
      * @param indentLength
      */
-    public AddIndent(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
+    public OpenBrace(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
         this.indentSymbol = indentSymbol;
         this.indentLength = indentLength;
         this.indentCounter = indentCounter;
@@ -33,7 +30,7 @@ public class AddIndent implements IOperation {
      */
     public String perform(final char symbol, final int currentIndent) {
         indentCounter.setIndentCounter(currentIndent + indentLength);
-        return '\n' + addIndent(indentCounter.getIndentCounter()) + symbol;
+        return symbol + '\n' + addIndent(indentCounter.getIndentCounter());
     }
 
     /**

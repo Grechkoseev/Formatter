@@ -1,10 +1,9 @@
 package it.sevenbits.packages.actions;
 
 /**
- * Interface for classes that describes operations with string
+ * Action interface
  */
-public interface IOperation {
-
+public interface IActions {
     /**
      * Operation
      * @param symbol

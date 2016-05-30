@@ -1,4 +1,4 @@
-package it.sevenbits.packages.formatter.Implementation;
+package it.sevenbits.packages.actions;
 
 /**
  * Counter of current indent
@@ -24,9 +24,10 @@ public class IndentCounter {
 
     /**
      * setter of current indent
-     * @param indentCounter is counter of indents
+     * @param indentCounter
      */
     public void setIndentCounter(Integer indentCounter) {
         this.indentCounter = indentCounter;
     }
+
 }

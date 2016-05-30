@@ -1,14 +1,14 @@
 package it.sevenbits.packages.actions.implementation;
 
-import it.sevenbits.packages.actions.IOperation;
-import it.sevenbits.packages.formatter.Implementation.IndentCounter;
+import it.sevenbits.packages.actions.IActions;
+import it.sevenbits.packages.actions.IndentCounter;
 
 import java.util.Arrays;
 
 /**
  * delete the indent and and transit on new line
  */
-public class DeleteIndent implements IOperation {
+public class CloseBrace implements IActions {
 
     private char indentSymbol;
     private int indentLength;
@@ -19,7 +19,7 @@ public class DeleteIndent implements IOperation {
      * @param indentSymbol symbol to indent
      * @param indentLength
      */
-    public DeleteIndent(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
+    public CloseBrace(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
         this.indentSymbol = indentSymbol;
         this.indentLength = indentLength;
         this.indentCounter = indentCounter;

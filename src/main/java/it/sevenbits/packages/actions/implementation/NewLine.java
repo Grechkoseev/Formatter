@@ -1,13 +1,13 @@
 package it.sevenbits.packages.actions.implementation;
 
-import it.sevenbits.packages.actions.IOperation;
+import it.sevenbits.packages.actions.IActions;
 
 import java.util.Arrays;
 
 /**
- * perform a newline
+ * if semicolon
  */
-public class NewString implements IOperation {
+public class NewLine implements IActions {
 
     private char indentSymbol;
 
@@ -15,7 +15,7 @@ public class NewString implements IOperation {
      * constructor
      * @param indentSymbol symbol to indent
      */
-    public NewString(final char indentSymbol) {
+    public NewLine(final char indentSymbol) {
         this.indentSymbol = indentSymbol;
     }
 
@@ -26,7 +26,7 @@ public class NewString implements IOperation {
      * @return '\n' + indent + next symbol
      */
     public String perform(final char symbol, final int currentIndent) {
-        return "\n" + makeIndent(currentIndent) + symbol;
+        return "\n" + makeIndent(currentIndent);
     }
 
     /**
