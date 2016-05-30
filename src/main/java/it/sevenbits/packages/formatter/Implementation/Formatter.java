@@ -35,7 +35,7 @@ public class Formatter implements IFormatter {
     public Formatter(final TablesOfTransitions transitionTable, final TableOfOutputs outputTable, IndentCounter indentCounter) throws FormatException {
         try {
             this.outputTable = outputTable.getTable();
-            this.actions = outputTable.getActs();
+            this.actions = outputTable.getActions();
             this.arrayOfStates = transitionTable.getArrayOfStates();
             this.state = transitionTable.getInitialState();
             this.alphabet = transitionTable.getAlphabet();
@@ -56,7 +56,7 @@ public class Formatter implements IFormatter {
             while (reader.hasNext()) {
                 char symbol = reader.getElement();
                 char clearSymbol = checkSymbol(symbol);
-                next = indexOf(clearSymbol, state);
+                next = indexOf(state, clearSymbol);
                 state = arrayOfStates[next];
                 output(current, next, symbol, writer);
                 current = next;
@@ -82,10 +82,11 @@ public class Formatter implements IFormatter {
      * @throws WriterException
      * @throws FormatException
      */
-    private void output(final int currentState, final int toState, final char element, final IWriter writer) throws WriterException, FormatException {
+    private void output(final int currentState, final int toState, final char element, final IWriter writer) throws WriterException {
         Integer[] col = outputTable[toState];
+        System.out.println(currentState + "->" + toState + " " + element);
         int act = col[currentState];
-            writer.write(actions.get(act).perform(element, indentCounter.getIndentCounter()));
+        writer.write(actions.get(act).perform(element, indentCounter.getIndentCounter()));
     }
 
     /**
@@ -93,7 +94,7 @@ public class Formatter implements IFormatter {
      * @return special symbol of alphabet or 's' if it is just another symbol
      */
     private char checkSymbol(final char symbol) {
-            return alphabet[indexOf(symbol, alphabet)];
+        return alphabet[indexOf(alphabet, symbol)];
     }
 
     /**
@@ -102,7 +103,7 @@ public class Formatter implements IFormatter {
      * @param array
      * @return index of element
      */
-    private int indexOf(final Character element, final Character[] array) {
+    private int indexOf(final Character[] array, final Character element) {
         for (int i = 0; i < array.length; i++) {
             if (element.equals(array[i])) {
                 return i;

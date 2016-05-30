@@ -60,12 +60,5 @@ public class TablesOfTransitions {
     public Character[] getInitialState() {
         return initialState;
     }
-
-    /**
-     * getter of final state
-     * @return final state
-     */
-    public Integer[] getFinalState() {
-        return finalState;
-    }
+    
 }

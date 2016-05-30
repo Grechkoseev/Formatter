@@ -16,7 +16,7 @@ import java.util.Map;
 public class TableOfOutputs {
 
     private Integer[][] table;
-    private Map<Integer, IOperation> acts;
+    private Map<Integer, IOperation> actions;
 
     /**
      * Constructor
@@ -40,11 +40,11 @@ public class TableOfOutputs {
         table[3] = stateFour;
         table[4] = stateFive;
 
-        acts = new HashMap<Integer, IOperation>();
-        acts.put(1, new AddIndent(' ', 4, indentCounter));
-        acts.put(2, new Write());
-        acts.put(3, new NewString(' '));
-        acts.put(4, new DeleteIndent(' ', 4, indentCounter));
+        actions = new HashMap<Integer, IOperation>();
+        actions.put(1, new AddIndent(' ', 4, indentCounter));
+        actions.put(2, new Write());
+        actions.put(3, new NewString(' '));
+        actions.put(4, new DeleteIndent(' ', 4, indentCounter));
 
     }
 
@@ -61,7 +61,7 @@ public class TableOfOutputs {
      * @return map of actions
      * @throws TableException
      */
-    public Map<Integer, IOperation> getActs() throws TableException {
-        return acts;
+    public Map<Integer, IOperation> getActions() throws TableException {
+        return actions;
     }
 }
