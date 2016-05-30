@@ -31,7 +31,6 @@ public class Formatter implements IFormatter {
 
     /**
      * Format method
-     *
      * @param reader
      * @param writer
      * @throws FormatException
