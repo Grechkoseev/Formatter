@@ -6,9 +6,9 @@ import it.sevenbits.packages.actions.IndentCounter;
 import java.util.Arrays;
 
 /**
- * if current symbol is '{'
+ * delete the indent
  */
-public class OpenBrace implements IActions {
+public class CloseBraceWithoutLineBreak implements IActions {
 
     private char indentSymbol;
     private int indentLength;
@@ -19,30 +19,30 @@ public class OpenBrace implements IActions {
      * @param indentSymbol symbol to indent
      * @param indentLength
      */
-    public OpenBrace(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
+    public CloseBraceWithoutLineBreak(final char indentSymbol, final int indentLength, final IndentCounter indentCounter) {
         this.indentSymbol = indentSymbol;
         this.indentLength = indentLength;
         this.indentCounter = indentCounter;
     }
 
     /**
-     * Operation of adding of indent and transition on new line
+     * Operation of removal of indent
      * @param symbol
      * @param currentIndent
-     * @return string '\n' + indent
+     * @return indent
      */
     public String perform(final char symbol, final int currentIndent) {
-        indentCounter.setIndentCounter(currentIndent + indentLength);
-        return symbol + "\n" + addIndent(indentCounter.getIndentCounter());
+        indentCounter.setIndentCounter(currentIndent - indentLength);
+        return createIndent(indentCounter.getIndentCounter()) + symbol;
     }
 
     /**
-     * add indent
+     * create indent
      * @param offset
-     * @return string with braces
+     * @return indent
      */
-    private String addIndent(final int offset) {
-        char[] array = new char[offset];
+    private String createIndent(final int offset) {
+        char[] array = new char[offset - 4];
         Arrays.fill(array, indentSymbol);
         return new String(array);
     }

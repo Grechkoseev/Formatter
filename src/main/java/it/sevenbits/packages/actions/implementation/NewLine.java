@@ -5,7 +5,7 @@ import it.sevenbits.packages.actions.IActions;
 import java.util.Arrays;
 
 /**
- * if semicolon
+ * if semicolon or :
  */
 public class NewLine implements IActions {
 
@@ -23,10 +23,10 @@ public class NewLine implements IActions {
      * Operation of transition on new line
      * @param symbol
      * @param currentIndent
-     * @return '\n' + indent + next symbol
+     * @return ";\n" + indent
      */
     public String perform(final char symbol, final int currentIndent) {
-        return "\n" + makeIndent(currentIndent);
+        return ";\n" + makeIndent(currentIndent);
     }
 
     /**
@@ -35,7 +35,7 @@ public class NewLine implements IActions {
      * @return indent
      */
     private String makeIndent(final int offset) {
-        char[] array = new char[offset];
+        char[] array = new char[offset - 4];
         Arrays.fill(array, indentSymbol);
         return new String(array);
     }

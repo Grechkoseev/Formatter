@@ -4,6 +4,10 @@ package it.sevenbits.packages.states;
  * Interface of states
  */
 public interface IState {
-
-    void action(final Character currentSymbol);
+    /**
+     * Action
+     * @param currentSymbol
+     * @return string that match current symbol
+     */
+    String action(final Character currentSymbol);
 }

@@ -6,6 +6,7 @@ import it.sevenbits.packages.reader.IReader;
 import it.sevenbits.packages.reader.Implementation.ReaderException;
 import it.sevenbits.packages.states.IState;
 import it.sevenbits.packages.states.Implementations.StateOne;
+import it.sevenbits.packages.states.Implementations.StateTwo;
 import it.sevenbits.packages.writer.IWriter;
 import it.sevenbits.packages.writer.Implementation.WriterException;
 
@@ -19,6 +20,7 @@ public class Formatter implements IFormatter {
 
     /**
      * Constructor
+     *
      * @param indentCounter
      * @throws FormatException
      */
@@ -26,8 +28,10 @@ public class Formatter implements IFormatter {
         this.indentCounter = indentCounter;
         this.state = new StateOne(indentCounter);
     }
+
     /**
      * Format method
+     *
      * @param reader
      * @param writer
      * @throws FormatException
@@ -35,11 +39,9 @@ public class Formatter implements IFormatter {
     public void format(final IReader reader, final IWriter writer) throws FormatException {
         try {
             while (reader.hasNext()) {
-                state = new StateOne(indentCounter);
                 Character symbol = reader.getElement();
-                state.action(symbol);
-
-                //тут будет функция которая устанавливает состояние
+                writer.write(state.action(symbol));
+                state = setState(symbol);
             }
             reader.close();
             writer.printOnConsole();
@@ -51,5 +53,17 @@ public class Formatter implements IFormatter {
         } catch (NullPointerException ex) {
             throw new FormatException("Incoming stream is null", ex);
         }
+    }
+
+    /**
+     * setter of states
+     * @param symbol
+     * @return state
+     */
+    public IState setState(final Character symbol) {
+        if (symbol.equals(';')) {
+            return new StateTwo(indentCounter);
+        }
+        return new StateOne(indentCounter);
     }
 }
