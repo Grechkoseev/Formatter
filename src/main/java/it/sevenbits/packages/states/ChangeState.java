@@ -1,6 +1,7 @@
 package it.sevenbits.packages.states;
 
 import it.sevenbits.packages.actions.IndentCounter;
+import it.sevenbits.packages.states.Implementations.StateFour;
 import it.sevenbits.packages.states.Implementations.StateOne;
 import it.sevenbits.packages.states.Implementations.StateThree;
 import it.sevenbits.packages.states.Implementations.StateTwo;
@@ -17,11 +18,16 @@ public class ChangeState {
      * @return new state
      */
     public IState changeState(final Character symbol, final IndentCounter indentCounter) {
-        if (symbol.equals(';')) {
-            return new StateTwo(indentCounter);
-        } else if (symbol.equals(' ')) {
-            return new StateThree(indentCounter);
+
+        switch (symbol) {
+            case(';'):
+                return new StateTwo(indentCounter);
+            case(' '):
+                return new StateThree(indentCounter);
+            case('/'):
+                return new StateFour(indentCounter);
+            default:
+                return new StateOne(indentCounter);
         }
-        return new StateOne(indentCounter);
     }
 }

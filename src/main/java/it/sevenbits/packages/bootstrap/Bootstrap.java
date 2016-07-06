@@ -24,7 +24,7 @@ public final class Bootstrap {
     private Bootstrap() {
     }
 
-    private static String EXAMPLE = "c            {i;c(){f;}                }";
+    private static String EXAMPLE = "c            {i;\n         c(){f;}                }";
 
     /**
      * main method

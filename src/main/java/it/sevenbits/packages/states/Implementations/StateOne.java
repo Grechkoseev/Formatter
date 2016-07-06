@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Write code
+ * When current symbol is just other symbol
  */
 public class StateOne implements IState {
 
